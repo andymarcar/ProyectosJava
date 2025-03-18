@@ -1,12 +1,11 @@
 package vista;
 
-import modelo.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
+import modelo.*;
 
 public class MenuNomina {
     private final Scanner scanner;
@@ -20,29 +19,29 @@ public class MenuNomina {
     }
     
     public void iniciar() {
-        boolean salir = false;
-        
-        while (!salir) {
-            mostrarMenuPrincipal();
-            int opcion = leerOpcion();
+        try (scanner) {
+            boolean salir = false;
             
-            switch (opcion) {
-                case 1 -> registrarEmpleado();
-                case 2 -> mostrarEmpleados();
-                case 3 -> calcularNomina();
-                case 4 -> calcularPrima();
-                case 5 -> calcularCesantias();
-                case 6 -> eliminarEmpleado();
-                case 7 -> mostrarDetallesEmpleado();
-                case 0 -> {
-                    salir = true;
-                    System.out.println("¡Gracias por usar el sistema de nómina!");
+            while (!salir) {
+                mostrarMenuPrincipal();
+                int opcion = leerOpcion();
+                
+                switch (opcion) {
+                    case 1 -> registrarEmpleado();
+                    case 2 -> mostrarEmpleados();
+                    case 3 -> calcularNomina();
+                    case 4 -> calcularPrima();
+                    case 5 -> calcularCesantias();
+                    case 6 -> eliminarEmpleado();
+                    case 7 -> mostrarDetallesEmpleado();
+                    case 0 -> {
+                        salir = true;
+                        System.out.println("¡Gracias por usar el sistema de nómina!");
+                    }
+                    default -> System.out.println("Opción no válida. Intente de nuevo.");
                 }
-                default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
         }
-        
-        scanner.close();
     }
     
     private void mostrarMenuPrincipal() {
